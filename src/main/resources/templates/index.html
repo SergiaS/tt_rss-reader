@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <h2>Sources:</h2>
+    <div th:each="source : ${sources}">
+        <div th:text="${source.getName()} + ': ' + ${source.getUrl()}">Source Name</div>
+    </div>
+
+    <hr>
+
+    <h2>Feeds:</h2>
+    <div th:each="feedTo : ${feedToList}">
+        <div style="font-style: italic" th:text="${feedTo.getPublicDate()}">Feed date</div>
+        <div style="font-weight: bold" th:text="${feedTo.getTitle()}">Feed title</div>
+        <div th:text="${feedTo.getDescription()}">Feed description</div>
+        <a th:href="@{${feedTo.getLink()}}" th:text="${feedTo.getLink()}">Feed link</a>
+
+        <br>
+        <br>
+    </div>
+
+</body>
+</html>
