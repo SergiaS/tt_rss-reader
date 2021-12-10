@@ -1,5 +1,6 @@
 package sk.rssreaderdemo.repository;
 
+import com.rometools.rome.feed.synd.SyndContent;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
@@ -11,8 +12,10 @@ import sk.rssreaderdemo.model.Source;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
@@ -55,7 +58,8 @@ public class FeedRepository {
 
         for (SyndEntry e : syndFeed.getEntries()) {
             String title = e.getTitle();
-            String description = e.getDescription().getValue();
+            SyndContent rowDescription = e.getDescription();
+            String description = rowDescription == null ? "N/A" : rowDescription.getValue();
             String link = e.getLink();
             Long publishedDate = e.getPublishedDate().getTime();
             String author = e.getAuthor();
